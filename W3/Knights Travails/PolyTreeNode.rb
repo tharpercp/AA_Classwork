@@ -2,8 +2,8 @@ class PolyTreeNode
 
   attr_reader :parent, :children, :value
 
-  def initialize(value)
-    @value = value
+  def initialize(start)
+    @start = start 
     @parent = nil
     @children = []
   end
