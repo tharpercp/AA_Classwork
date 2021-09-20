@@ -32,14 +32,30 @@ class PolyTreeNode
   end
 
   def dfs(value)
-    return nil if self.nil?
-    stack = [self]
-    if self.value == value
-      return self
-    else
-      self.children.first.dfs(value)
+    return self if self.value == value
+    return nil if self.children.nil? 
+    self.children.each do |child|
+        new_search = child.dfs(value)
+        return new_search if !new_search.nil?
+
+        # current_node = stack.last
+        # current_node.children.each { |child| stack.push(child) }
+        # (stack.pop).dfs(value)
     end
+    nil
   end
 
+  def bfs(value)
+
+    queue = []
+    queue.unshift(self)
+
+    until queue.empty?
+        current_node = queue.shift 
+        return current_node if current_node.value == value 
+        current_node.children.each { |child| queue.push(child) } 
+    end
+    nil
+  end 
 
 end
