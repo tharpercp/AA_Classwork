@@ -73,10 +73,19 @@ class SnackBox
 end
 
 class CorgiSnacks
+  
 
   def initialize(snack_box, box_id)
     @snack_box = snack_box
     @box_id = box_id
+  end
+
+  def method_missing(method_name, *args)
+      info = @snack_box.get_(method_name)_info(@box_id)
+      tastiness = @snack_box.get_(method_name)_tastiness(@box_id)
+      result = "#{method_name}: #{info}: #{tastiness} "
+      tastiness > 30 ? "* #{result}" : result
+
   end
 
   def bone
