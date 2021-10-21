@@ -5,7 +5,11 @@ class Clock {
       // 3. Call printTime.
       // 4. Schedule the tick at 1 second intervals.
         this.datetime = new Date();
-        this.hours = this.datetime.getHours();
+        
+    }
+
+    startTime(){
+      this.hours = this.datetime.getHours();
         this.minutes = this.datetime.getMinutes();
         this.seconds = this.datetime.getSeconds();
         this.printTime();
