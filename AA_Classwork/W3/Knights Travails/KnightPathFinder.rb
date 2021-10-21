@@ -28,21 +28,18 @@ class KnightPathFinder
   end
 
   def build_move_tree
-    start = self.new_move_positions(self.start_pos)
-    queue = start
+    self.start_pos = PolyTreeNode.new(start_pos)
+    queue = [root_node]
 
     until queue.empty?
       current = queue.shift 
-      new_inst = PolyTreeNode.new(current)
-      valids = self.new_move_positions(current)
-      if !valids.nil?
-        new_inst.add_children(valids)
-        new_inst.children.each { |child| queue << child }
-      else
-        break
+      current_pos = current.start
+      new_move_positions(current_pos).each do |next_pos|
+        next_node = PolyTreeNode.new(next_pos)
+        current_node.add_child(next_node)
+        nodes << next_node
       end
     end
-    @considered_positions
   end
 
   def new_move_positions(position)

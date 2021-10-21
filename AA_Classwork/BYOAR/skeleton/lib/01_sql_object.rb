@@ -4,8 +4,19 @@ require 'active_support/inflector'
 # of this project. It was only a warm up.
 
 class SQLObject
+
+  
+
   def self.columns
     # ...
+    table_name = self.table_name 
+    col = DBConnection.execute2(<<-SQL, table_name)
+      SELECT
+        *
+      FROM
+        table_name
+    SQL
+    col[0]
   end
 
   def self.finalize!

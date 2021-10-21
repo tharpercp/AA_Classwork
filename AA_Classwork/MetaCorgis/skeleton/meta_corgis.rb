@@ -86,6 +86,9 @@ class CorgiSnacks
       result = "#{method_name}: #{info}: #{tastiness} "
       tastiness > 30 ? "* #{result}" : result
 
+      self.class.send('get_#{method_name}_info', *args)
+      self.class.send('get_#{method_name}_tastiness', *args)
+
   end
 
   def bone
