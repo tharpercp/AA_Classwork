@@ -1,4 +1,5 @@
 class Clock {
+    // String.prototype.padStart(4, '0'); // '0009'
     constructor() {
       // 1. Create a Date object.
       // 2. Store the hours, minutes, and seconds.
@@ -19,7 +20,10 @@ class Clock {
     printTime() {
       // Format the time in HH:MM:SS
       // Use console.log to print it.
-      console.log(`${this.hours}:${this.minutes}:${this.seconds}`);
+      let hours = (this.hours % 12).toString().padStart(2, '0');
+      let minutes = this.minutes.toString().padStart(2, '0');
+      let seconds = this.seconds.toString().padStart(2, '0');
+      console.log(`${hours}:${minutes}:${seconds}`);
     }
   
     _tick() {
