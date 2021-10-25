@@ -1,14 +1,14 @@
 const Util = require("./util.js");
 const MovingObject = require("./moving_object.js")
 
-Util.inherits(Asteroid, MovingObject);
-
-function Asteroid(obj) {
+function Asteroid(obj, game) {
   obj.vel = Util.randomVec(1);
-  obj.rad = 25;
-  obj.color = 'grey';
+  obj.rad = 30;
+  obj.color = 'red';
 
-  MovingObject.call(this, obj)
+  MovingObject.call(this, obj, game)
 }
+
+Util.inherits(Asteroid, MovingObject);
 
 module.exports = Asteroid;
