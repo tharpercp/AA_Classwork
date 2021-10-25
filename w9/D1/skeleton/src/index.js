@@ -1,3 +1,5 @@
+const Game = require('./game.js')
+
 const MovingObject = require('./moving_object.js');
 const Asteroid = require('./asteroid.js')
 window.MovingObject = MovingObject;
@@ -11,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, 1000, 600);
     
-    let dummy = new Asteroid({pos:[100, 100]});
+    let dummy = new Game();
     dummy.draw(ctx);
 } )
+

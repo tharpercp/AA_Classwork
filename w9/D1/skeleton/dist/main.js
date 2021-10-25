@@ -15,7 +15,17 @@
   \*************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Util = __webpack_require__(/*! ./util.js */ \"./src/util.js\");\nconst MovingObject = __webpack_require__(/*! ./moving_object.js */ \"./src/moving_object.js\")\n\nUtil.inherits(Asteroid, MovingObject);\n\nfunction Asteroid(obj) {\n  obj.vel = Util.randomVec(2);\n  obj.rad = 25;\n  obj.color = 'grey';\n\n  MovingObject.call(this, obj)\n}\n\nlet x = new Asteroid( { pos: [30, 30]} );\nconsole.log(x);\n\nmodule.exports = Asteroid;\n\n//# sourceURL=webpack://skeleton/./src/asteroid.js?");
+eval("const Util = __webpack_require__(/*! ./util.js */ \"./src/util.js\");\nconst MovingObject = __webpack_require__(/*! ./moving_object.js */ \"./src/moving_object.js\")\n\nUtil.inherits(Asteroid, MovingObject);\n\nfunction Asteroid(obj) {\n  obj.vel = Util.randomVec(1);\n  obj.rad = 25;\n  obj.color = 'grey';\n\n  MovingObject.call(this, obj)\n}\n\nmodule.exports = Asteroid;\n\n//# sourceURL=webpack://skeleton/./src/asteroid.js?");
+
+/***/ }),
+
+/***/ "./src/game.js":
+/*!*********************!*\
+  !*** ./src/game.js ***!
+  \*********************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const Asteroid = __webpack_require__(/*! ./asteroid */ \"./src/asteroid.js\");\r\n\r\nfunction Game () {\r\n    this.DIM_X = 1000;\r\n    this.DIM_Y = 600;\r\n    this.NUM_ASTEROIDS = 10;\r\n    this.asteroids = this.addAsteroids();\r\n}\r\n\r\nGame.prototype.addAsteroids = function() {\r\n    const asteroids = [];\r\n    while (asteroids.length < this.NUM_ASTEROIDS) {\r\n        let pos = this.randomPos();\r\n        asteroids.push(new Asteroid({\"pos\": pos }))\r\n    }\r\n    return asteroids; \r\n}\r\n\r\nGame.prototype.randomPos = function () {\r\n    let x;\r\n    let y;\r\n    switch (Math.floor(Math.random() * 4)) {\r\n        case 0: \r\n            x = 0;\r\n            y = Math.floor(Math.random() * this.DIM_Y);\r\n        break;\r\n        case 1:\r\n            y = 0;\r\n            x = Math.floor(Math.random() * this.DIM_X);\r\n        break;\r\n        case 2:\r\n            x = this.DIM_X;\r\n            y = Math.floor(Math.random() * this.DIM_Y);\r\n        break;\r\n        case 3:\r\n            y = this.DIM_Y;\r\n            x = Math.floor(Math.random() * this.DIM_X);\r\n        break;\r\n    }\r\n    return [x, y];\r\n}\r\n\r\nGame.prototype.draw = function(ctx) {\r\n    ctx.clearRect(0, 0, 1000, 600);\r\n    for (let i = 0; i < this.asteroids.length; i++) {\r\n        this.asteroids[i].draw(ctx)\r\n    }\r\n}\r\n\r\nmodule.exports = Game;\r\nlet x = new Game();\r\nconsole.log(x.asteroids);\n\n//# sourceURL=webpack://skeleton/./src/game.js?");
 
 /***/ }),
 
@@ -25,7 +35,7 @@ eval("const Util = __webpack_require__(/*! ./util.js */ \"./src/util.js\");\ncon
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const MovingObject = __webpack_require__(/*! ./moving_object.js */ \"./src/moving_object.js\");\r\nconst Asteroid = __webpack_require__(/*! ./asteroid.js */ \"./src/asteroid.js\")\r\nwindow.MovingObject = MovingObject;\r\n\r\n\r\ndocument.addEventListener('DOMContentLoaded', () => {\r\n    const canvasElement = document.getElementById('game-canvas');\r\n    canvasElement.width = 1000;\r\n    canvasElement.height = 600;\r\n    const ctx = canvasElement.getContext('2d');\r\n    ctx.fillStyle = 'black';\r\n    ctx.fillRect(0, 0, 1000, 600);\r\n    \r\n    let dummy = new Asteroid({pos:[100, 100]});\r\n    dummy.draw(ctx);\r\n} )\n\n//# sourceURL=webpack://skeleton/./src/index.js?");
+eval("const Game = __webpack_require__(/*! ./game.js */ \"./src/game.js\")\r\n\r\nconst MovingObject = __webpack_require__(/*! ./moving_object.js */ \"./src/moving_object.js\");\r\nconst Asteroid = __webpack_require__(/*! ./asteroid.js */ \"./src/asteroid.js\")\r\nwindow.MovingObject = MovingObject;\r\n\r\n\r\ndocument.addEventListener('DOMContentLoaded', () => {\r\n    const canvasElement = document.getElementById('game-canvas');\r\n    canvasElement.width = 1000;\r\n    canvasElement.height = 600;\r\n    const ctx = canvasElement.getContext('2d');\r\n    ctx.fillStyle = 'black';\r\n    ctx.fillRect(0, 0, 1000, 600);\r\n    \r\n    let dummy = new Game();\r\n    dummy.draw(ctx);\r\n} )\r\n\r\n\n\n//# sourceURL=webpack://skeleton/./src/index.js?");
 
 /***/ }),
 
